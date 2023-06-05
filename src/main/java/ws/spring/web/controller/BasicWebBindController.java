@@ -134,9 +134,9 @@ public class BasicWebBindController {
      * <pre>
      *     GET /bind/basic/default-bind/100?name=tom&age=18&address=beijing
      * </pre>
-     * 缺省绑定，从请求中获取参数（request.getParameter(String)）绑定到同名java bean属性，URI 参数则不会绑定
+     * 缺省绑定，自动从请求和路径中获取同名参数绑定到同名java bean属性
      *
-     * @param employee {@link Employee#setId(Integer)}不会使用URI 参数绑定
+     * @param employee
      * @param desc     不会被 URI 参数所绑定
      * @return
      */

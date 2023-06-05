@@ -2,10 +2,9 @@ package ws.spring.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
+import ws.spring.web.annotation.EnableWebBindAdvice;
 
-
-@EnableScheduling
+@EnableWebBindAdvice
 @SpringBootApplication
 public class SpringWebApplication {
 

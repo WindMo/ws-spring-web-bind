@@ -5,9 +5,8 @@ import org.springframework.util.Assert;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -104,5 +103,24 @@ public class ObjectUtils extends org.springframework.util.ObjectUtils {
                     }
                     return value;
                 }));
+    }
+
+    // ~ map
+    // =====================================================================================
+
+    public static <K,V,Q,P> Map<K,V> converterMap(Map<Q,P> map, Function<Q, K> keyConverter, Function<P, V> valueConverter) {
+
+        Objects.requireNonNull(map);
+        Map<K,V> result = new HashMap<>();
+        map.forEach((k,v) -> result.put(keyConverter.apply(k), valueConverter.apply(v)));
+        return result;
+    }
+
+    public static <K,V,Q,P> MultiValueMap<K,V> converterMultiValueMap(MultiValueMap<Q,P> map, Function<Q, K> keyConverter, Function<P, V> valueConverter) {
+
+        Objects.requireNonNull(map);
+        MultiValueMap<K,V> result = new LinkedMultiValueMap<>();
+        map.forEach((k,v) -> v.stream().map(valueConverter).forEach(e -> result.add(keyConverter.apply(k), e)));
+        return result;
     }
 }
